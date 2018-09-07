@@ -1,0 +1,46 @@
+class Solution {
+public:
+    /**
+     * @param intervals: an array of meeting time intervals
+     * @return: if a person could attend all meetings
+     */
+    bool canAttendMeetings(vector<Interval> &intervals) {
+        // Write your code here
+        
+        int length = intervals.size();
+        int min_start;
+        int max_end;
+        int sum_start;
+        int sum_end;
+        
+        if(length>0)
+        {
+            min_start = intervals[0].start;
+            max_end = intervals[0].end;
+            sum_start = min_start;
+            sum_end = max_end;
+        }
+        else
+            return true;
+            
+        for(int i=1; i<length; i++)
+        {
+            int temp_start = intervals[i].start;
+            int temp_end = intervals[i].end;
+            
+            if(temp_start < min_start)
+                min_start = temp_start;
+            if(temp_end > max_end)
+                max_end = temp_end;
+            sum_start = sum_start + temp_start;
+            sum_end = sum_end + temp_end;
+            
+            if(sum_end-sum_start > max_end-min_start)
+                return false;
+            
+        }
+        return true;
+        
+      
+    }
+};
