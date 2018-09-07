@@ -1,0 +1,24 @@
+class Solution {
+public:
+    /**
+     * @param intervals: an array of meeting time intervals
+     * @return: if a person could attend all meetings
+     */
+    bool canAttendMeetings(vector<Interval> &intervals) {
+        // Write your code here
+        
+        int i=0, j=0, length = intervals.size();
+        for( i=0; i<length; i++)
+        {
+            for( j = i+1; j<length; j++)
+            {
+                if(intervals[i].start >= intervals[j].end || intervals[i].end <= intervals[j].start)
+                {}
+                else
+                    return false;
+            }
+        }
+        return true;
+
+    }
+};
