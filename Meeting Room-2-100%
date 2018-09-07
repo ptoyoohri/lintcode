@@ -7,18 +7,17 @@ public:
     bool canAttendMeetings(vector<Interval> &intervals) {
         // Write your code here
         
-        int length = intervals.size();
+       int length = intervals.size();
         int min_start;
         int max_end;
-        int sum_start;
-        int sum_end;
+        int sum_length = 0;
         
         if(length>0)
         {
             min_start = intervals[0].start;
             max_end = intervals[0].end;
-            sum_start = min_start;
-            sum_end = max_end;
+            sum_length = sum_length + intervals[0].end - intervals[0].start;
+         
         }
         else
             return true;
@@ -32,15 +31,12 @@ public:
                 min_start = temp_start;
             if(temp_end > max_end)
                 max_end = temp_end;
-            sum_start = sum_start + temp_start;
-            sum_end = sum_end + temp_end;
+            sum_length = sum_length + temp_end - temp_start;
             
-            if(sum_end-sum_start > max_end-min_start)
+            if(sum_length > max_end - min_start)
                 return false;
             
         }
         return true;
-        
-      
     }
 };
