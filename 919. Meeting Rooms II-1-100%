@@ -1,0 +1,42 @@
+/**
+ * Definition of Interval:
+ * classs Interval {
+ *     int start, end;
+ *     Interval(int start, int end) {
+ *         this->start = start;
+ *         this->end = end;
+ *     }
+ * }
+ */
+#include<algorithm>
+
+class Solution {
+public:
+    /**
+     * @param intervals: an array of meeting time intervals
+     * @return: the minimum number of conference rooms required
+     */
+    int minMeetingRooms(vector<Interval> &intervals) {
+        // Write your code here
+        vector <int>start_time;
+        vector <int>end_time;
+    
+        for(vector<Interval>::iterator it = intervals.begin(); it != intervals.end(); it++)
+        {
+            start_time.push_back(it->start);
+            end_time.push_back(it->end);
+        }
+        
+        sort(start_time.begin(), start_time.end());
+        sort(end_time.begin(), end_time.end());
+        int RoomCount = 0, endIndex = 0;
+        for( int i=0; i<start_time.size();  i++)
+        {
+            if(start_time[i] < end_time[endIndex])
+                RoomCount++;
+            else
+                endIndex++;
+        }
+        return RoomCount;
+    }
+};
